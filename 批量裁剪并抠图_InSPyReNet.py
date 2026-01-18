@@ -1,3 +1,32 @@
+# 准备工作
+# 打开 Miniconda 的黑色终端窗口（Anaconda Prompt）。
+
+# 第一步：创建干净的 Python 环境
+# 我们创建一个名为 cutout 的新环境，指定 Python 3.10（兼容性最好的版本）。
+# conda create -n cutout python=3.10 -y
+# conda activate cutout
+
+# 第二步：安装 GPU 版 PyTorch (最关键的一步)
+# 千万不要直接运行 pip install torch，那样会装成 CPU 版。 请复制下面这整行命令，强制安装支持 CUDA 11.8 的版本（包含 torchvision，这是 transparent-background 必须的依赖）：
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# (注意：这一步下载文件较大约 2.5GB，请耐心等待下载完成)
+# 如果使用其他软件下载下来torch，torch-2.x.x+cu118-xxxx.whl，可以cd到目录下，安装 (文件名输前几个字然后按 Tab 键会自动补全) pip install torch-2.x.x+cu118-xxxx.whl
+# torch (核心), torchvision (图像处理), torchaudio（声音）都需要安装，pip install torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# 第三步：安装抠图库和其他依赖
+# 这里我们将 NumPy 降级、抠图库、进度条库 合并为一条指令安装。 (特别注意 "numpy<2" 是为了防止报错)
+# pip install "numpy<2" transparent-background tqdm pillow
+
+# 第四步：运行你的脚本
+# 假设你已经把刚才的脚本保存为 批量裁剪并抠图_InSPyReNet.py，现在就可以直接运行了：
+# python 批量裁剪并抠图_InSPyReNet.py
+
+# ✅ 如何验证安装成功了？
+# 在运行脚本前，你可以输入下面这行代码“验身”。 如果输出 True，说明显卡驱动配置完美；如果输出 False，说明你可能需要去 NVIDIA 官网更新一下显卡驱动。
+# python -c "import torch; print(f'GPU状态: {torch.cuda.is_available()}')"
+# 按照这个流程，你的新环境就是“即开即用”的状态，不需要再手动修补 DLL 或降级库了。
+
+
 import os
 import sys
 from pathlib import Path
