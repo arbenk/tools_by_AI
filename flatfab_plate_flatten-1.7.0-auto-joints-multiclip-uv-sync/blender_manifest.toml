@@ -1,0 +1,14 @@
+schema_version = "1.0.0"
+
+id = "flatfab_plate_flatten"
+version = "1.7.0"
+name = "FlatFab Plate Flatten"
+tagline = "Auto plate joints, multi-interval clipping, flattening and UV sync"
+maintainer = "OpenAI"
+type = "add-on"
+
+blender_version_min = "4.2.0"
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+files = "Export SVG DXF and PDF manufacturing files selected by the user"
